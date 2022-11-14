@@ -41,7 +41,10 @@ def verify(message, signature, publicKey):
     except:
             print("Error during key verification")
 
+#TEST CASES
 if __name__ == "__main__":
+
+    #Valid cases
     pr,pu = generate_keys()
     print(pr, pu, sep="\n")
     message = "this must work!"
@@ -54,6 +57,7 @@ if __name__ == "__main__":
     else:
             print("Something wrong occurred. Verification wasn't successfull.")
 
+    #Verifying hash with incorrect public key
     pr2, pu2 = generate_keys()
     sig2 = sign(message, pr2)
     correct = verify(message, sig2, pu)
@@ -63,7 +67,8 @@ if __name__ == "__main__":
     else:
         print("Wrong signature doesn't check out. Good.")
 
-    badMessage = message + "I want to kill your family, dude!"
+    #Attempt to tamper with signed message
+    badMessage = message + "Hackerman!"
 
     correct = verify(badMessage, signature, pu)
 
